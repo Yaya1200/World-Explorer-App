@@ -1,6 +1,6 @@
 import React from "react";
 
-function HomePage{
+function HomePage(){
   return <div>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -40,3 +40,4 @@ function HomePage{
 </nav>
 </div>
 }
+export default HomePage;
