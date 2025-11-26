@@ -5,9 +5,15 @@ import "./Home.css";
 function HomePage(){
  let url = "https://restcountries.com/v3.1/all?fields=name,region,population";
  const {data, is_error,Loading} = Countrydata(url);
- const[changeddata, setbypopulation] = useState(false)
+ const[changeddata, setbypopulation] = useState(false);
+ const[continentName1, setcontinentName] = useState("");
  function filterByPopulation(){
-     setbypopulation(true);
+     url = `https://restcountries.com/v3.1/region/${continentName1}?fields=name,region,population`
+ }
+ function inputContinent(e){
+   const continentName = e.target.value;
+   setcontinentName(continentName);
+  
  }
   return <div><div>
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -39,12 +45,12 @@ function HomePage(){
   </a>
 
   <ul className="dropdown-menu">
-       <input placeholder="please enter the name"/>
-    <li><button className="dropdown-item" href="#" onClick={filterByPopulation}>Continent</button>
+       <input placeholder="please enter the name" name="continent" onChange={inputContinent}/>
+    <li><button className="dropdown-item" href="#" onClick={filterByPopulation}> Check Continent</button>
  
     </li>
-     <input placeholder="please enter the number"/>
-    <li><button className="dropdown-item" href="#">Population</button></li>
+     <input placeholder="please enter the number" name="population"/>
+    <li><button className="dropdown-item" href="#">Check Population</button></li>
      
   </ul>
 </li>
