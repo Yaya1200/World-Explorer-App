@@ -3,17 +3,24 @@ import axios from "axios";
 import Countrydata from "./CustomHook";
 import "./Home.css";
 function HomePage(){
- let url = "https://restcountries.com/v3.1/all?fields=name,region,population";
- const {data, is_error,Loading} = Countrydata(url);
- const[changeddata, setbypopulation] = useState(false);
- const[continentName1, setcontinentName] = useState("");
- function filterByPopulation(){
-     url = `https://restcountries.com/v3.1/region/${continentName1}?fields=name,region,population`
+  const[urladress, seturladress] = useState("https://restcountries.com/v3.1/all?fields=name,region,population")
+ const {data, is_error,Loading} = Countrydata(urladress);
+ const[subRegionData, setBySubRegion] = useState();
+ const[continentName1, setcontinentName] = useState();
+ 
+ function filterByContinent(){
+     seturladress(`https://restcountries.com/v3.1/region/${continentName1}?fields=name,region,population`);
  }
  function inputContinent(e){
    const continentName = e.target.value;
    setcontinentName(continentName);
-  
+ }
+function filterBySubregion(){
+     seturladress(`https://restcountries.com/v3.1/subregion/${subRegionData}?fields=name,region,population`);
+ }
+ function inputSubregion(e){
+   const subRegion = e.target.value;
+   setBySubRegion(subRegion);
  }
   return <div><div>
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -46,11 +53,11 @@ function HomePage(){
 
   <ul className="dropdown-menu">
        <input placeholder="please enter the name" name="continent" onChange={inputContinent}/>
-    <li><button className="dropdown-item" href="#" onClick={filterByPopulation}> Check Continent</button>
+    <li><button className="dropdown-item" href="#" onClick={filterByContinent}> Check Continent</button>
  
     </li>
-     <input placeholder="please enter the number" name="population"/>
-    <li><button className="dropdown-item" href="#">Check Population</button></li>
+     <input placeholder="please enter the number" name="population" onChange={inputSubregion}/>
+    <li><button className="dropdown-item" href="#" onClick={filterBySubregion}>Check Sub-Region </button></li>
      
   </ul>
 </li>
@@ -65,9 +72,9 @@ function HomePage(){
 </div>
 
 <div className="grid-content">
-{data.slice(0, 100).map((country) => (
-  <div className="grid-elements">
-  <ul key={country.cca3} style={{listStyle:'none'}}>
+{data.slice(0, 100).map((country,index) => (
+  <div className="grid-elements" key={index}>
+  <ul style={{listStyle:'none'}}>
     <li>Name: {country.name.official}</li>
     <li>Continent: {country.region}</li>
     <li>Population: {country.population}</li>
