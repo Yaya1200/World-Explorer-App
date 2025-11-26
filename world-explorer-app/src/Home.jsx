@@ -1,6 +1,8 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import axios from "axios";
+import Countrydata from "./CustomHook";
 function HomePage(){
+ const {data, is_error} = Countrydata(url)
   return <div>
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
@@ -21,7 +23,7 @@ function HomePage(){
         </li>
         <li className="nav-item dropdown">
   <a 
-    className="nav-link dropdown-toggle" 
+    className="nav-link dropdown-toggle active" 
     href="#" 
     role="button" 
     data-bs-toggle="dropdown" 
