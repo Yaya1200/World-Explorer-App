@@ -49,8 +49,15 @@ function HomePage(){
 </nav>
 </div>
 
-<div>
-  
+<div className="gid-content">
+{data.slice(0, 20).map((country) => (
+  <ul key={country.cca3}>
+    <li>Name: {country.name.official}</li>
+    <li>Continent: {country.continents}</li>
+    <li>Population: {country.population}</li>
+  </ul>
+))}
+
 </div>
 
 
