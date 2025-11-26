@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Countrydata from "./CustomHook";
 import "./Home.css";
 function HomePage(){
-  let url = "https://restcountries.com/v3.1/all?fields=name,region,population";
- const {data, is_error,Loading} = Countrydata(url)
- console.log(data);
+ let url = "https://restcountries.com/v3.1/all?fields=name,region,population";
+ const {data, is_error,Loading} = Countrydata(url);
+ const[changeddata, setbypopulation] = useState(false)
+ function filterByPopulation(){
+     setbypopulation(true);
+ }
   return <div><div>
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
@@ -36,8 +39,13 @@ function HomePage(){
   </a>
 
   <ul className="dropdown-menu">
-    <li><a className="dropdown-item" href="#">Continent</a></li>
-    <li><a className="dropdown-item" href="#">Population</a></li>
+       <input placeholder="please enter the name"/>
+    <li><button className="dropdown-item" href="#" onClick={filterByPopulation}>Continent</button>
+ 
+    </li>
+     <input placeholder="please enter the number"/>
+    <li><button className="dropdown-item" href="#">Population</button></li>
+     
   </ul>
 </li>
       </ul>
