@@ -7,6 +7,7 @@ function HomePage(){
  const {data, is_error,Loading} = Countrydata(urladress);
  const[subRegionData, setBySubRegion] = useState();
  const[continentName1, setcontinentName] = useState();
+ const[searchName, setSearchName] = useState()
  
  function filterByContinent(){
      seturladress(`https://restcountries.com/v3.1/region/${continentName1}?fields=name,region,population`);
@@ -21,6 +22,16 @@ function filterBySubregion(){
  function inputSubregion(e){
    const subRegion = e.target.value;
    setBySubRegion(subRegion);
+ }
+ function filterBySubregion(){
+     seturladress(`https://restcountries.com/v3.1/subregion/${subRegionData}?fields=name,region,population`);
+ }
+  function Searchbyname (e){
+   const countryName = e.target.value;
+  setSearchName(countryName);
+ }
+ function Searchfunction(){
+  seturladress(`https://restcountries.com/v3.1/name/${searchName}?fields=name,region,population`)
  }
   return <div><div>
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -63,8 +74,8 @@ function filterBySubregion(){
 </li>
       </ul>
       <form className="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
+        <input className="form-control me-2" type="search" placeholder="Search" onChange={Searchbyname} aria-label="Search"/>
+        <button className="btn btn-outline-success" type="submit" onClick={Searchfunction}>Search</button>
       </form>
     </div>
   </div>
