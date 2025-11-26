@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Countrydata from "./CustomHook";
+import "./Home.css";
 function HomePage(){
   let url = "https://restcountries.com/v3.1/all?fields=name,region,population";
  const {data, is_error,Loading} = Countrydata(url)
@@ -49,13 +50,16 @@ function HomePage(){
 </nav>
 </div>
 
-<div className="gid-content">
-{data.slice(0, 20).map((country) => (
-  <ul key={country.cca3}>
+<div className="grid-content">
+{data.slice(0, 100).map((country) => (
+  <div className="grid-elements">
+  <ul key={country.cca3} style={{listStyle:'none'}}>
     <li>Name: {country.name.official}</li>
-    <li>Continent: {country.continents}</li>
+    <li>Continent: {country.region}</li>
     <li>Population: {country.population}</li>
   </ul>
+  <button className="grid-button"> view detail</button>
+  </div>
 ))}
 
 </div>
