@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import Countrydata from "./CustomHook";
 function HomePage(){
- const {data, is_error} = Countrydata(url)
-  return <div>
+  let url = "https://restcountries.com/v3.1/all?fields=name,region,population";
+ const {data, is_error,Loading} = Countrydata(url)
+ console.log(data);
+  return <div><div>
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">World-Explorer-App</a>
@@ -45,6 +47,13 @@ function HomePage(){
     </div>
   </div>
 </nav>
+</div>
+
+<div>
+  
+</div>
+
+
 </div>
 }
 export default HomePage;
