@@ -10,7 +10,7 @@ function CountriesPage() {
 
   const { data, is_error, Loading } = Countrydata(urladress);
     console.log(data)
-  const [continentName1, setcontinentName] = useState("");
+  const [countrieslanguage1, setcountrieslanguage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [homepage, sethomepage] = useState(false);
 
@@ -22,13 +22,14 @@ function CountriesPage() {
    }
   function filterByContinent() {
     seturladress(
-      `https://restcountries.com/v3.1/lang/${continentName1}?fields=name,flags,languages`
+      `https://restcountries.com/v3.1/lang/${countrieslanguage1}?fields=name,flags,languages`
 
     );
   }
 
   function inputContinent(e) {
-    setcontinentName(e.target.value);
+    const value1 = e.target.value;
+    setcountrieslanguage(value1);
   }
 
 
