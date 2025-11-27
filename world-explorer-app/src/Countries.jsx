@@ -23,14 +23,14 @@ function CountriesPage() {
    if(homepage){
     return <HomePage/>
    }
-  function filterByContinent() {
+  function filterByLanguage() {
     seturladress(
       `https://restcountries.com/v3.1/lang/${countrieslanguage1}?fields=name,flags,languages`
 
     );
   }
 
-  function inputContinent(e) {
+  function inputLanguage(e) {
     const value1 = e.target.value;
     setcountrieslanguage(value1);
   }
@@ -104,14 +104,14 @@ function CountriesPage() {
 
                 <ul className="dropdown-menu">
                   <input
-                    placeholder="Enter Continent"
+                    placeholder="Enter only 3 characters of language"
                     name="continent"
-                    onChange={inputContinent}
+                    onChange={inputLanguage}
                   />
                   <li>
                     <button
                       className="dropdown-item"
-                      onClick={filterByContinent}
+                      onClick={filterByLanguage}
                     >
                       Check language
                     </button>
