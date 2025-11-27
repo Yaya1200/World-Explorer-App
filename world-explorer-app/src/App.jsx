@@ -2,12 +2,12 @@ import React from 'react'
 import './App.css'
 import HomePage from './Home'
 
+
 function App() {
 
   return (
-    <>
+    
       <HomePage/>
-    </>
   )
 }
 

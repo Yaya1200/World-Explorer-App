@@ -3,11 +3,12 @@ import Countrydata from "./CustomHook";
 import "./Home.css";
 import CountriesPage from "./Countries";
 
+
 function HomePage() {
   const [urladress, seturladress] = useState(
     "https://restcountries.com/v3.1/all?fields=name,region,population"
   );
-
+ 
 
   const { data, is_error, Loading } = Countrydata(urladress);
    
@@ -54,7 +55,7 @@ function HomePage() {
   }
 
   return (
-    <div>
+    <div >
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">

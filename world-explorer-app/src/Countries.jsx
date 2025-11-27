@@ -9,7 +9,6 @@ function CountriesPage() {
   );
 
   const { data, is_error, Loading } = Countrydata(urladress);
-    console.log(data)
   const [countrieslanguage1, setcountrieslanguage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [homepage, sethomepage] = useState(false);
