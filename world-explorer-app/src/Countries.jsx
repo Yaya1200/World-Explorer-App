@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import Countrydata from "./CustomHook";
 import "./Home.css";
 import HomePage from "./Home";
+import { useContext } from "react";
+import { ThemeContext } from "./TeamContext";
+import "./Countires.css"
 
 function CountriesPage() {
   const [urladress, seturladress] = useState(
     "https://restcountries.com/v3.1/all?fields=name,flags,languages"
   );
+  const {theme, toggleTheme} = useContext(ThemeContext);
 
   const { data, is_error, Loading } = Countrydata(urladress);
   const [countrieslanguage1, setcountrieslanguage] = useState("");
@@ -44,8 +48,10 @@ function CountriesPage() {
   }
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <div style={{backgroundColor: theme == 'light' ? 'white' : 'black', color: theme == 'light' ? 'black' : 'white'}}>
+      <nav className={`navbar navbar-expand-lg ${
+  theme === "light" ? "navbar-light-mode" : "navbar-dark-mode"
+}`}>
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             World-Explorer-App
@@ -128,6 +134,8 @@ function CountriesPage() {
               >
                 Search
               </button>
+                 <button style={{width: '60px', height:'40px', border: 'none'}} onClick={toggleTheme}>
+                {theme === "light" ? "☀️" : "🌙"}</button>
             </form>
           </div>
         </div>
@@ -138,7 +146,7 @@ function CountriesPage() {
           <div className="grid-elements" key={index}>
             <ul style={{ listStyle: "none" }}>
               <li>Name: {country.name.official}</li>
-              <li style={{backgroundImage: `url(${country.flags.png})`,
+              <li style={{backgroundImage: `url(${country.flags.svg})`,
                           width: '30px',
                           height: '20px',
                           objectFit: "cover"
