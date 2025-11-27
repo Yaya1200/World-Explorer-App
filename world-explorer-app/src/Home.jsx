@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Countrydata from "./CustomHook";
 import "./Home.css";
 import CountriesPage from "./Countries";
-
+import { ThemeContext } from "./TeamContext"; 
 
 function HomePage() {
   const [urladress, seturladress] = useState(
     "https://restcountries.com/v3.1/all?fields=name,region,population"
   );
- 
+
+  const { theme, toggleTheme } = useContext(ThemeContext); 
 
   const { data, is_error, Loading } = Countrydata(urladress);
-   
+
   const [subRegionData, setBySubRegion] = useState("");
   const [continentName1, setcontinentName] = useState("");
   const [searchName, setSearchName] = useState("");
@@ -20,9 +21,11 @@ function HomePage() {
   useEffect(() => {
     if (is_error) alert(`There is an error: ${is_error}`);
   }, [is_error]);
-   if(countirespage){
-    return <CountriesPage/>
-   }
+
+  if (countirespage) {
+    return <CountriesPage />;
+  }
+
   function filterByContinent() {
     seturladress(
       `https://restcountries.com/v3.1/region/${continentName1}?fields=name,region,population`
@@ -55,8 +58,16 @@ function HomePage() {
   }
 
   return (
-    <div >
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <div
+      style={{
+        backgroundColor: theme === "light" ? "white" : "black",
+        color: theme === "light" ? "black" : "white",
+        minHeight: "100vh",
+      }}
+    >
+      <nav className={`navbar navbar-expand-lg ${
+  theme === "light" ? "navbar-light-mode" : "navbar-dark-mode"
+}`}>
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             World-Explorer-App
@@ -77,9 +88,13 @@ function HomePage() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <button className="nav-link active" aria-current="page" onClick={()=>{
-                  setcountriespage(true);
-                }}>
+                <button
+                  className="nav-link active"
+                  aria-current="page"
+                  onClick={() => {
+                    setcountriespage(true);
+                  }}
+                >
                   Countries
                 </button>
               </li>
@@ -153,6 +168,8 @@ function HomePage() {
               >
                 Search
               </button>
+              <button style={{width: '60px', height:'40px', border: 'none'}} onClick={toggleTheme}>
+                {theme === "light" ? "☀️" : "🌙"}</button>
             </form>
           </div>
         </div>
@@ -162,7 +179,7 @@ function HomePage() {
         {data.slice(0, 100).map((country, index) => (
           <div className="grid-elements" key={index}>
             <ul style={{ listStyle: "none" }}>
-            <li>Name: {country.name.official}</li>
+              <li>Name: {country.name.official}</li>
               <li>Region: {country.region}</li>
               <li>Population: {country.population}</li>
             </ul>

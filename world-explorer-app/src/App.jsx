@@ -1,14 +1,18 @@
-import React from 'react'
-import './App.css'
-import HomePage from './Home'
+import React from 'react';
+import './App.css';
+import HomePage from './Home';
+import { ThemeProvider } from './TeamContext';
 
 
 function App() {
-
   return (
-    
-      <HomePage/>
-  )
+     <ThemeProvider>
+      <HomePage />
+      </ThemeProvider>
+  
+   
+  );
 }
 
-export default App
+export default App;
+

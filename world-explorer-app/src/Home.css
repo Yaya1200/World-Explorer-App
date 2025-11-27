@@ -6,6 +6,24 @@
   margin-left: 20px;
  
 }
+.navbar-light-mode {
+  background-color: white;
+  color: black; 
+}
+
+
+.navbar-dark-mode {
+  background-color: black;
+  color: white;
+}
+
+.navbar-dark-mode .navbar-brand,
+.navbar-dark-mode .nav-link,
+.navbar-dark-mode button {
+  color: white !important; 
+}
+
+
 .grid-elements{
   width: 300px;
   padding: 10px;
