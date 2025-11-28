@@ -104,7 +104,7 @@ function CountriesPage() {
 
                 <ul className="dropdown-menu">
                   <input
-                    placeholder="Enter only 3 characters of language"
+                    placeholder="Enter only 3 characters'"
                     name="continent"
                     onChange={inputLanguage}
                   />
