@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Countrydata from "./CustomHook";
+import './quiz.css';
 import "./Home.css";
 import HomePage from "./Home";
 import { useContext } from "react";
@@ -8,51 +8,39 @@ import "./Countires.css"
 import CountriesPage from "./Countries";
 import CustomQuiz from "./Cusomquiz";
 
+
 function QuizPage() {
-  const [urladress, seturladress] = useState(
-    "https://restcountries.com/v3.1/all?fields=name,flags,languages"
-  );
+
   const {theme, toggleTheme} = useContext(ThemeContext);
   const {storequestion} = CustomQuiz();
-  console.log(storequestion);
-  const [countrieslanguage1, setcountrieslanguage] = useState("");
-  const [searchName, setSearchName] = useState("");
+  console.log(storequestion[0]);
   const [homepage, sethomepage] = useState(false);
   const [countirespage, setcountriespage] = useState(false);
+  const [answer, setanswer] = useState('');
 
-  useEffect(() => {
-    if (is_error) alert(`There is an error: ${is_error}`);
-  }, [is_error]);
    if(homepage){
     return <HomePage/>
    }
    if(countirespage){
     return <CountriesPage/>
    }
-  function filterByLanguage() {
-    seturladress(
-      `https://restcountries.com/v3.1/lang/${countrieslanguage1}?fields=name,flags,languages`
 
-    );
+  function Checkanswer(){
+
   }
-
-  function inputLanguage(e) {
-    const value1 = e.target.value;
-    setcountrieslanguage(value1);
+  let answerarray = []
+  function addingtoanswerarray(){
+    answerarray.push(storequestion[0]?.incorrect_answers[0]);
+    answerarray.push(storequestion[0]?.incorrect_answers[1]);
+    answerarray.push(storequestion[0]?.incorrect_answers[2]);
+   answerarray.push(storequestion[0]?.correct_answer);
   }
-
-
-  function Searchbyname(e) {
-    setSearchName(e.target.value);
-  }
-
-  function Searchfunction(e) {
-    e.preventDefault();
-    seturladress(
-      `https://restcountries.com/v3.1/name/${searchName}?fields=name,flags,languages`
-    );
-  }
-
+  addingtoanswerarray();
+  console.log(answerarray);
+  let value1 = Math.floor((Math.random() * 3))
+  let value2 = Math.floor((Math.random() * 2))
+  let value3 = Math.floor((Math.random() * 1))
+  let value4 = Math.floor((Math.random() * 0))
   return (
     <div style={{backgroundColor: theme == 'light' ? 'white' : 'black', color: theme == 'light' ? 'black' : 'white'}}>
       <div>
@@ -99,50 +87,11 @@ function QuizPage() {
                   Settings
                 </a>
               </li>
-
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle active"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="true"
-                >
-                  Filter
-                </a>
-
-                <ul className="dropdown-menu">
-                  <input
-                    placeholder="Enter only 3 characters'"
-                    name="continent"
-                    onChange={inputLanguage}
-                  />
-                  <li>
-                    <button
-                      className="dropdown-item " 
-                      onClick={filterByLanguage}
-                    >
-                      Check language
-                    </button>
-                  </li>
-                </ul>
-              </li>
             </ul>
 
             <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search by name"
-                onChange={Searchbyname}
-              />
-              <button
-                className="btn btn-outline-success"
-                type="button"
-                onClick={Searchfunction}
-              >
-                Search
-              </button>
+            
+              
                  <button style={{width: '60px', height:'40px', border: 'none'}} onClick={toggleTheme}>
                 {theme === "light" ? "☀️" : "🌙"}</button>
             </form>
@@ -150,13 +99,38 @@ function QuizPage() {
         </div>
       </nav>
       </div>
-      <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
-</div>
-
-
+       <form onSubmit={Checkanswer} className="quizbox">
+        <div>
+      <p>Choose the Correct answer Fromt the givern alternatives</p>
+      <p>1. {`${answerarray[value1]}`} </p>
+      <label>
+      <input type="radio" checked ={answer === "A"} onChange={()=>{
+        setanswer('A');
+      }}></input> A. {`${storequestion[0]?.correct_answer}`}
+      </label><br/>
+      <label>
+      <input type="radio" checked ={answer === "B"} onChange={()=>{
+        setanswer('B');
+      }}></input> B. {`${storequestion[0]?.correct_answer}`}
+      </label><br/>
+      <label>
+      <input type="radio" checked ={answer === "C"} onChange={()=>{
+        setanswer('C');
+      }}></input> C. {`${storequestion[0]?.correct_answer}`}
+      </label><br/>
+      <label>
+      <input type="radio" checked ={answer === "D"} onChange={()=>{
+        setanswer('D');
+      }}></input> D. {`${storequestion[0]?.correct_answer}`}
+      </label>
     </div>
+      <button onClick={Checkanswer}>check answer</button>
+    </form>
+    <div  className="correct-answer">
+      <p>the correct answer is {`${storequestion[0]?.correct_answer}`}</p>
+    </div>
+    </div>
+   
   );
 }
 
