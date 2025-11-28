@@ -6,14 +6,15 @@ import { useContext } from "react";
 import { ThemeContext } from "./TeamContext";
 import "./Countires.css"
 import CountriesPage from "./Countries";
+import CustomQuiz from "./Cusomquiz";
 
 function QuizPage() {
   const [urladress, seturladress] = useState(
     "https://restcountries.com/v3.1/all?fields=name,flags,languages"
   );
   const {theme, toggleTheme} = useContext(ThemeContext);
-
-  const { data, is_error, Loading } = Countrydata(urladress);
+  const {storequestion} = CustomQuiz();
+  console.log(storequestion);
   const [countrieslanguage1, setcountrieslanguage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [homepage, sethomepage] = useState(false);
@@ -54,6 +55,7 @@ function QuizPage() {
 
   return (
     <div style={{backgroundColor: theme == 'light' ? 'white' : 'black', color: theme == 'light' ? 'black' : 'white'}}>
+      <div>
       <nav className={`navbar navbar-expand-lg ${
   theme === "light" ? "navbar-light-mode" : "navbar-dark-mode"
 }`}>
@@ -147,6 +149,13 @@ function QuizPage() {
           </div>
         </div>
       </nav>
+      </div>
+      <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+</div>
+
+
     </div>
   );
 }
