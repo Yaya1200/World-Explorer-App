@@ -5,6 +5,7 @@ import HomePage from "./Home";
 import { useContext } from "react";
 import { ThemeContext } from "./TeamContext";
 import "./Countires.css"
+import QuizPage from "./Quiz";
 
 function CountriesPage() {
   const [urladress, seturladress] = useState(
@@ -16,12 +17,16 @@ function CountriesPage() {
   const [countrieslanguage1, setcountrieslanguage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [homepage, sethomepage] = useState(false);
+  const [quizpage, setquizpage] = useState(false);
 
   useEffect(() => {
     if (is_error) alert(`There is an error: ${is_error}`);
   }, [is_error]);
    if(homepage){
     return <HomePage/>
+   }
+   if(quizpage){
+    return <QuizPage/>
    }
   function filterByLanguage() {
     seturladress(
@@ -80,9 +85,11 @@ function CountriesPage() {
               </li>
 
               <li className="nav-item">
-                <a className="nav-link active" href="#">
+                <button className="nav-link active" href="#"  onClick={()=>{
+                  setquizpage(true);
+                }}>
                   Quiz
-                </a>
+                </button>
               </li>
 
               <li className="nav-item">
@@ -110,7 +117,7 @@ function CountriesPage() {
                   />
                   <li>
                     <button
-                      className="dropdown-item"
+                      className="dropdown-item " 
                       onClick={filterByLanguage}
                     >
                       Check language

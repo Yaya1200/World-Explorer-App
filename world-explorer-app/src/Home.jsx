@@ -3,6 +3,7 @@ import Countrydata from "./CustomHook";
 import "./Home.css";
 import CountriesPage from "./Countries";
 import { ThemeContext } from "./TeamContext"; 
+import QuizPage from "./Quiz";
 
 function HomePage() {
   const [urladress, seturladress] = useState(
@@ -17,6 +18,7 @@ function HomePage() {
   const [continentName1, setcontinentName] = useState("");
   const [searchName, setSearchName] = useState("");
   const [countirespage, setcountriespage] = useState(false);
+  const [quizpage, setquizpage] = useState(false);
 
   useEffect(() => {
     if (is_error) alert(`There is an error: ${is_error}`);
@@ -24,6 +26,9 @@ function HomePage() {
 
   if (countirespage) {
     return <CountriesPage />;
+  }
+  if(quizpage){
+    return <QuizPage/>
   }
 
   function filterByContinent() {
@@ -100,9 +105,11 @@ function HomePage() {
               </li>
 
               <li className="nav-item">
-                <a className="nav-link active" href="#">
+                <button className="nav-link active" href="#" onClick={()=>{
+                  setquizpage(true);
+                }}>
                   Quiz
-                </a>
+                </button>
               </li>
 
               <li className="nav-item">

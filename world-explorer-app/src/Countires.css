@@ -14,3 +14,7 @@
 .navbar-dark-mode button {
   color: white !important; 
 }
+.dropdown-item:hover {
+  color: black;
+  background-color: black;
+}
