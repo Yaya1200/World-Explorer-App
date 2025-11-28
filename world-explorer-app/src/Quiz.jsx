@@ -36,11 +36,27 @@ function QuizPage() {
    answerarray.push(storequestion[0]?.correct_answer);
   }
   addingtoanswerarray();
+  const [value1, setvalue1] = useState();
+  const [value2, setvalue2] = useState();
+  const [value3, setvalue3] = useState();
+  const [value4, setvalue4] = useState();
+  useEffect(()=>{
+      settingthevalues();
+  },[answerarray])
+
+  function settingthevalues(){
   console.log(answerarray);
-  let value1 = Math.floor((Math.random() * 3))
-  let value2 = Math.floor((Math.random() * 2))
-  let value3 = Math.floor((Math.random() * 1))
-  let value4 = Math.floor((Math.random() * 0))
+  let i = Math.floor(Math.random()*4)
+  setvalue1(answerarray[i]);
+  answerarray.splice(i,1);
+  i = Math.floor(Math.random()*3)
+  setvalue2(answerarray[i]);
+  answerarray.splice(i,1)
+  i = Math.floor(Math.random()*2);
+ setvalue3(answerarray[i]);
+  answerarray.splice(i,1);
+  setvalue4(answerarray[i]);;}
+
   return (
     <div style={{backgroundColor: theme == 'light' ? 'white' : 'black', color: theme == 'light' ? 'black' : 'white'}}>
       <div>
@@ -102,26 +118,26 @@ function QuizPage() {
        <form onSubmit={Checkanswer} className="quizbox">
         <div>
       <p>Choose the Correct answer Fromt the givern alternatives</p>
-      <p>1. {`${answerarray[value1]}`} </p>
+      <p>1. {`${storequestion[0]?.question}`}</p>
       <label>
       <input type="radio" checked ={answer === "A"} onChange={()=>{
         setanswer('A');
-      }}></input> A. {`${storequestion[0]?.correct_answer}`}
+      }}></input> A. {`${answerarray[value1]}`}
       </label><br/>
       <label>
       <input type="radio" checked ={answer === "B"} onChange={()=>{
         setanswer('B');
-      }}></input> B. {`${storequestion[0]?.correct_answer}`}
+      }}></input> B. {`${answerarray[value2]}`}
       </label><br/>
       <label>
       <input type="radio" checked ={answer === "C"} onChange={()=>{
         setanswer('C');
-      }}></input> C. {`${storequestion[0]?.correct_answer}`}
+      }}></input> C. {`${answerarray[value3]}`}
       </label><br/>
       <label>
       <input type="radio" checked ={answer === "D"} onChange={()=>{
         setanswer('D');
-      }}></input> D. {`${storequestion[0]?.correct_answer}`}
+      }}></input> D. {`${answerarray[value4]}`}
       </label>
     </div>
       <button onClick={Checkanswer}>check answer</button>
