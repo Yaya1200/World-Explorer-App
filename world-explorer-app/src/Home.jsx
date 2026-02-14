@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
   const [urladress, seturladress] = useState(
-    "https://restcountries.com/v3.1/all?fields=name,region,population"
+    "https://restcountries.com/v3.1/all?fields=name,region,population,cca3"
   );
 
   const { theme, toggleTheme } = useContext(ThemeContext); 
@@ -27,7 +27,7 @@ function HomePage() {
 
   function filterByContinent() {
     seturladress(
-      `https://restcountries.com/v3.1/region/${continentName1}?fields=name,region,population`
+      `https://restcountries.com/v3.1/region/${continentName1}?fields=name,region,population,cca3`
     );
   }
 
@@ -41,7 +41,7 @@ function HomePage() {
 
   function filterBySubregion() {
     seturladress(
-      `https://restcountries.com/v3.1/subregion/${subRegionData}?fields=name,region,population`
+      `https://restcountries.com/v3.1/subregion/${subRegionData}?fields=name,region,population,cca3`
     );
   }
 
@@ -52,7 +52,7 @@ function HomePage() {
   function Searchfunction(e) {
     e.preventDefault();
     seturladress(
-      `https://restcountries.com/v3.1/name/${searchName}?fields=name,region,population`
+      `https://restcountries.com/v3.1/name/${searchName}?fields=name,region,population,cca3`
     );
   }
 
@@ -175,8 +175,14 @@ function HomePage() {
               <li>Region: {country.region}</li>
               <li>Population: {country.population}</li>
             </ul>
-
-            <button className="grid-button">view detail</button>
+             <Link to={`/detail/${country.cca3}`}>
+                                
+                        <button
+                          className="grid-button" 
+                        >
+                          view detail
+                        </button>
+                      </Link>
           </div>
         ))}
       </div>
