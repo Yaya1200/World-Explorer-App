@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import  { useEffect, useState, useContext } from "react";
 import Countrydata from "./CustomHook";
 import "./Home.css";
-import CountriesPage from "./Countries";
 import { ThemeContext } from "./TeamContext"; 
-import QuizPage from "./Quiz";
+import { Link } from "react-router-dom";
+
 
 function HomePage() {
   const [urladress, seturladress] = useState(
@@ -12,24 +12,18 @@ function HomePage() {
 
   const { theme, toggleTheme } = useContext(ThemeContext); 
 
-  const { data, is_error, Loading } = Countrydata(urladress);
+  const { data, is_error} = Countrydata(urladress);
 
   const [subRegionData, setBySubRegion] = useState("");
   const [continentName1, setcontinentName] = useState("");
   const [searchName, setSearchName] = useState("");
-  const [countirespage, setcountriespage] = useState(false);
-  const [quizpage, setquizpage] = useState(false);
+  
 
   useEffect(() => {
     if (is_error) alert(`There is an error: ${is_error}`);
   }, [is_error]);
 
-  if (countirespage) {
-    return <CountriesPage />;
-  }
-  if(quizpage){
-    return <QuizPage/>
-  }
+
 
   function filterByContinent() {
     seturladress(
@@ -93,31 +87,22 @@ function HomePage() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <button
-                  className="nav-link active"
-                  aria-current="page"
-                  onClick={() => {
-                    setcountriespage(true);
-                  }}
+               <Link
+                  className="nav-link" to="/countries"
+               
                 >
                   Countries
-                </button>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <button className="nav-link active" href="#" onClick={()=>{
-                  setquizpage(true);
-                }}>
+               <Link
+                  className="nav-link" to="/quiz"
+               
+                >
                   Quiz
-                </button>
+                </Link>
               </li>
-
-              <li className="nav-item">
-                <a className="nav-link active" href="#">
-                  Settings
-                </a>
-              </li>
-
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle active"
