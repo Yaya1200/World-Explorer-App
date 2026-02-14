@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function CountriesPage() {
   const [urladress, seturladress] = useState(
-    "https://restcountries.com/v3.1/all?fields=name,flags,languages"
+    "https://restcountries.com/v3.1/all?fields=name,flags,languages,cca3"
   );
   const {theme, toggleTheme} = useContext(ThemeContext);
 
@@ -24,7 +24,7 @@ function CountriesPage() {
 
   function filterByLanguage() {
     seturladress(
-      `https://restcountries.com/v3.1/lang/${countrieslanguage1}?fields=name,flags,languages`
+      `https://restcountries.com/v3.1/lang/${countrieslanguage1}?fields=name,flags,languages,cca3`
 
     );
   }
@@ -42,9 +42,10 @@ function CountriesPage() {
   function Searchfunction(e) {
     e.preventDefault();
     seturladress(
-      `https://restcountries.com/v3.1/name/${searchName}?fields=name,flags,languages`
+      `https://restcountries.com/v3.1/name/${searchName}?fields=name,flags,languages,cca3`
     );
   }
+  
 
   return (
     <div style={{backgroundColor: theme == 'light' ? 'white' : 'black', color: theme == 'light' ? 'black' : 'white'}}>
@@ -139,7 +140,7 @@ function CountriesPage() {
       </nav>
 
       <div className="grid-content">
-        {data.slice(0, 100).map((country, index) => (
+        {data?.slice(0, 100).map((country, index) => (
           <div className="grid-elements" key={index}>
             <ul style={{ listStyle: "none" }}>
               <li>Name: {country.name.official}</li>
@@ -150,9 +151,17 @@ function CountriesPage() {
                                 }}></li>
               <li>Language: {Object.values(country.languages)[0]}</li>
               
+             
+              
             </ul>
-
-            <button className="grid-button">view detail</button>
+                    <Link to={`/detail/${country.cca3}`}>
+                    
+            <button
+              className="grid-button" 
+            >
+              view detail
+            </button>
+          </Link>
           </div>
         ))}
       </div>
