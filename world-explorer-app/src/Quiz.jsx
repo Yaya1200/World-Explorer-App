@@ -1,20 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
+import  { useEffect, useState, useContext } from "react";
 import "./quiz.css";
 import "./Home.css";
 import "./Countires.css";
-
-import HomePage from "./Home";
-import CountriesPage from "./Countries";
 import CustomQuiz from "./Cusomquiz";
 import { ThemeContext } from "./TeamContext";
+import { Link } from "react-router-dom";
 
 function QuizPage() {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   const { storequestion } = CustomQuiz();
 
-  const [homepage, setHomepage] = useState(false);
-  const [countriesPage, setCountriesPage] = useState(false);
+
 
   const [answer, setAnswer] = useState("");
   const [answerOptions, setAnswerOptions] = useState([]); 
@@ -22,8 +19,6 @@ function QuizPage() {
   const [correctanswer,  setcorrectanswer] = useState(false);
 
 
-  if (homepage) return <HomePage />;
-  if (countriesPage) return <CountriesPage />;
 
 
   useEffect(() => {
@@ -101,26 +96,22 @@ function QuizPage() {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <button
-                  className="nav-link"
-                  onClick={() => setHomepage(true)}
+              <li className="nav-item" >
+                <Link
+                  className="nav-link" to="/"
+               
                 >
                   Home
-                </button>
+                </Link>
               </li>
 
-              <li className="nav-item">
-                <button
-                  className="nav-link"
-                  onClick={() => setCountriesPage(true)}
+              <li className="nav-item" href="/countries">
+                <Link
+                  className="nav-link" to="/countries"
+               
                 >
                   Countries
-                </button>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link">Settings</a>
+                </Link>
               </li>
             </ul>
 
