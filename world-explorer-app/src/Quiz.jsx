@@ -141,13 +141,13 @@ function QuizPage() {
               checked={answer === option}
               onChange={() => setAnswer(option)} 
             /> 
-            {"  "}
+            {"      "}
             {String.fromCharCode(65 + i)}. {option}
             <br/>
           </label> 
         ))}<br/>
          
-        <button type="submit">Check Answer</button>
+        <button type="submit" style={{marginTop: "20px"}}>Check Answer</button>
       </form>
 
       <div className="correct-answer">
